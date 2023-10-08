@@ -65,3 +65,66 @@ function initScene() {
 
     render();
 }
+
+function initPhysics() {
+    physicsWorld = new CANNON.World({
+        allowSleep: true,
+        gravity: new CANNON.Vec3(0, -50, 0),
+    })
+    physicsWorld.defaultContactMaterial.restitution = .3;
+}
+
+function createFloor() {
+    const floor = new THREE.Mesh(
+        new THREE.PlaneGeometry(1000, 1000),
+        new THREE.ShadowMaterial({
+            opacity: .1
+        })
+    )
+    floor.receiveShadow = true;
+    floor.position.y = -7;
+    floor.quaternion.setFromAxisAngle(new THREE.Vector3(-1, 0, 0), Math.PI * .5);
+    scene.add(floor);
+
+    const floorBody = new CANNON.Body({
+        type: CANNON.Body.STATIC,
+        shape: new CANNON.Plane(),
+    });
+    floorBody.position.copy(floor.position);
+    floorBody.quaternion.copy(floor.quaternion);
+    physicsWorld.addBody(floorBody);
+}
+
+function createDiceMesh() {
+    const boxMaterialOuter = new THREE.MeshStandardMaterial({
+        color: 0xeeeeee,
+    })
+    const boxMaterialInner = new THREE.MeshStandardMaterial({
+        color: 0x000000,
+        roughness: 0,
+        metalness: 1,
+        side: THREE.DoubleSide
+    })
+
+    const diceMesh = new THREE.Group();
+    const innerMesh = new THREE.Mesh(createInnerGeometry(), boxMaterialInner);
+    const outerMesh = new THREE.Mesh(createBoxGeometry(), boxMaterialOuter);
+    outerMesh.castShadow = true;
+    diceMesh.add(innerMesh, outerMesh);
+
+    return diceMesh;
+}
+
+function createDice() {
+    const mesh = diceMesh.clone();
+    scene.add(mesh);
+
+    const body = new CANNON.Body({
+        mass: 1,
+        shape: new CANNON.Box(new CANNON.Vec3(.5, .5, .5)),
+        sleepTimeLimit: .1
+    });
+    physicsWorld.addBody(body);
+
+    return {mesh, body};
+}

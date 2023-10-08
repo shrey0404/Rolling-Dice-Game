@@ -73,3 +73,59 @@ a:focus-visible {
 	outline: 2px solid red;
 	background: transparent;
 }
+main {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.unbutton {
+	background: none;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
+.unbutton:focus {
+	outline: none;
+}
+
+.frame {
+	color: var(--color-title);
+	padding: 1.5rem;
+	display: grid;
+	grid-template-columns: auto auto 1fr;
+	grid-template-rows: auto;
+	grid-template-areas: 'title prev sponsor';
+	justify-content: start;
+	grid-gap: 2rem;
+	z-index: 1000;
+}
+.frame a:not(.frame__title-back) {
+	white-space: nowrap;
+	overflow: hidden;
+	position: relative;
+}
+
+.frame a:not(.frame__title-back)::before {
+	content: '';
+	height: 1px;
+	width: 100%;
+	background: currentColor;
+	position: absolute;
+	top: 90%;
+	transition: transform 0.3s;
+	transform-origin: 0% 50%;
+}
+
+.frame a:not(.frame__title-back):hover::before {
+	transform: scaleX(0);
+	transform-origin: 100% 50%;
+}
+
+.frame__title {
+	grid-area: title;
+	display: flex;
+}
