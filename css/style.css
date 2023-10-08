@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 }
 :root {
-	font-size: 16px;
+	font-size: 20px;
 	--color-text: #000;
 	--color-bg: #ddd;
 	--color-link: #888;
@@ -278,10 +278,48 @@ canvas {
 	transform: translate3d(0,-10px,0);
 }
 
-
-/* .ui-controls #roll-btn:active {
-	transform: translateY(2px);
+.logo {
+    text-align: center;
+    padding: 20px;
 }
-.ui-controls #roll-btn:hover {
-	background-color: #3737af;
-} */
+
+.game-name {
+    font-size: 40px;
+    font-weight: bold;
+    color: #ff6347; /* Red color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
+    animation: bounce 2s infinite; /* Add animation to the game name */
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+.dice-icons {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+
+.dice {
+    display: inline-block;
+    margin: 0 5px;
+    animation: spin 1s infinite; /* Add animation to dice icons */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

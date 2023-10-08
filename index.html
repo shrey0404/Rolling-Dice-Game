@@ -2,7 +2,7 @@
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="UTF-8" />
-		<title>Three.js Dice Roller | Codrops</title>
+		<title>Rollin' Fates</title>
 		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
@@ -10,14 +10,30 @@
 	<body>
 		<main>
 			<div class="frame">
-				<div class="frame__title"> 
-					<h1 class="frame__title-main">Rollin' Fates</h1>
+				<div class="frame__title">
+                    <div class="logo">
+                        <span class="game-name">Rollin' Fates</span>
+                        <div class="dice-icons">
+                            <div class="dice">⚀</div>
+                            <div class="dice">⚁</div>
+                            <div class="dice">⚂</div>
+                            <div class="dice">⚃</div>
+                            <div class="dice">⚄</div>
+                            <div class="dice">⚅</div>
+                        </div>
+                    </div> 
+					
 				</div>
 			</div>
 			<div class="content">
 				<canvas id="canvas"></canvas>
 				<div class="ui-controls">
-					<div class="score">Score: <span id="score-result"></span></div>
+					<div class="score"><ul>Score: <span id="score-result"></ul></span>
+                        <ui class="intructions">
+                            <li>double tap to throw the dice</li>
+                            <li>pan and zoom if the dice rolled too far</li>
+                        </ui>
+                    </div>
                     <button class="button button--janus" id="roll-btn"><span>Throw the dice</span></button>
 				</div>
 			</div>
@@ -31,7 +47,6 @@
 			}
 		  }
 		</script>
-		<script src="https://tympanus.net/codrops/adpacks/cda_sponsor.js"></script>
 		<script type="module" src="./js/index.js"></script>
 	</body>
 </html>
