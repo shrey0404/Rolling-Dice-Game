@@ -291,3 +291,27 @@ function updateSceneSize() {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
+function throwDice() {
+    scoreResult.innerHTML = '';
+
+    diceArray.forEach((d, dIdx) => {
+
+        d.body.velocity.setZero();
+        d.body.angularVelocity.setZero();
+
+        d.body.position = new CANNON.Vec3(6, dIdx * 1.5, 0);
+        d.mesh.position.copy(d.body.position);
+
+        d.mesh.rotation.set(2 * Math.PI * Math.random(), 0, 2 * Math.PI * Math.random())
+        d.body.quaternion.copy(d.mesh.quaternion);
+
+        const force = 3 + 5 * Math.random();
+        d.body.applyImpulse(
+            new CANNON.Vec3(-force, force, 0),
+            new CANNON.Vec3(0, 0, .2)
+        );
+
+        d.body.allowSleep = true;
+    });
+}
